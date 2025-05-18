@@ -1,5 +1,4 @@
 from pathlib import Path
-from utils.config import Config
 from datetime import timedelta
 
 import os
@@ -19,9 +18,6 @@ load_dotenv(dotenv_path=env_path)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
 
-# Creating Config object to read secure info from config file
-if DEBUG:
-    config = Config()
 
 ALLOWED_HOSTS = [
     'localhost',
