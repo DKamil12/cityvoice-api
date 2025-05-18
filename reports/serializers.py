@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Report, Comments
+from .models import Category, Report, Comments, District
 from django.contrib.auth.models import User
 
 class UserSerializer(serializers.ModelSerializer):
@@ -28,16 +28,23 @@ class CommentSerializerOnWrite(serializers.ModelSerializer):
         exclude = ['user']
 
 
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = District
+        fields = ['id', 'name']
+
+
 class ReportOnCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
-        exclude = ['status', 'user']
+        exclude = ['status', 'user', 'district']
 
 
 class ReportOnReadSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     user = UserSerializer()
     comments = CommentSerializerOnRead(many=True, read_only=True)
+    district = DistrictSerializer()
 
     class Meta:
         model = Report

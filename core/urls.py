@@ -1,11 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .views import CustomTokenObtainPairView, RegisterView
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('reports.urls')),
-    path('api/v1/token/', TokenObtainPairView.as_view()),
+    path('api/v1/register/', RegisterView.as_view(), name='register'),
+    path('api/v1/token/', CustomTokenObtainPairView.as_view()),
     path('api/v1/token/refresh/', TokenRefreshView.as_view()),
-    path('api/v1/statistics/', include('charts.urls')),
-]
+    path('api/v1/charts/', include('charts.urls')),
+    path('api/v1/statistics/survey/', include('surveys.urls')),
+    path('api/v1/rewards/', include('rewards.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

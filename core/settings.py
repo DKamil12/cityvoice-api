@@ -1,5 +1,12 @@
 from pathlib import Path
 from utils.config import Config
+from datetime import timedelta
+
+import os
+from dotenv import load_dotenv
+import dj_database_url
+
+load_dotenv()
 
 # Creating Config object to read secure info from config file
 config = Config()
@@ -7,17 +14,21 @@ config = Config()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9s^p^$yay@wdy!+$=td*(bghkad1hs_eq(**#utonp7+k%in3a'
+SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '10.0.2.2',
+    '192.168.0.12'
+]
+
+if not DEBUG:
+    ALLOWED_HOSTS += ["cityvoice-api.onrender.com"]
 
 
 # Application definition
@@ -29,10 +40,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
+    "django.contrib.gis",
     'django_filters',
+    'rest_framework',
+    'corsheaders',
+    
+    # microapps
     'reports',
     'charts',
+    'rewards',
+    'surveys',
 ]
 
 MIDDLEWARE = [
@@ -43,9 +60,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 ROOT_URLCONF = 'core.urls'
+
+if DEBUG:
+    GDAL_LIBRARY_PATH = r'C:/Program Files/GDAL/gdal.dll'
 
 TEMPLATES = [
     {
@@ -89,6 +112,13 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "USER_ID_FIELD": "id",
+    "USER_ID_CLAIM": "user_id",
+    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -105,19 +135,31 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': config['database']['name'],   
+#         'USER': config['database']['user'], 
+#         'PASSWORD': config['database']['password'],  
+#         'HOST': config['database']['host'],   
+#         'PORT': config['database']['port'],
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config['database']['name'],   
-        'USER': config['database']['user'], 
-        'PASSWORD': config['database']['password'],  
-        'HOST': config['database']['host'],   
-        'PORT': config['database']['port'],
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

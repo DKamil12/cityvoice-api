@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cityvoice-back
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn core.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cityvoice-db
+          property: connectionString
+
+databases:
+  - name: cityvoice-db
