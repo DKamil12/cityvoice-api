@@ -161,5 +161,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
