@@ -6,19 +6,22 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
-load_dotenv()
-
-# Creating Config object to read secure info from config file
-config = Config()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+
+env_path = os.path.join(BASE_DIR, ".env.prod" if not DEBUG else ".env.dev")
+load_dotenv(dotenv_path=env_path)
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
+# Creating Config object to read secure info from config file
+if DEBUG:
+    config = Config()
 
 ALLOWED_HOSTS = [
     'localhost',
