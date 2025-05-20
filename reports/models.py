@@ -12,6 +12,7 @@ class Category(models.Model):
 class District(models.Model):
     name = models.CharField(max_length=100, unique=True)
     geometry = gis_models.MultiPolygonField(null=True)
+    image = models.ImageField(blank=True)
 
     def __str__(self):
         return self.name

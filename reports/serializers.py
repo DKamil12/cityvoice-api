@@ -31,7 +31,7 @@ class CommentSerializerOnWrite(serializers.ModelSerializer):
 class DistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = District
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'image']
 
 
 class ReportOnCreateSerializer(serializers.ModelSerializer):
