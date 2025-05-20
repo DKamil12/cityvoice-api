@@ -9,11 +9,11 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env_path = os.path.join(BASE_DIR, ".env.prod" if os.getenv("DJANGO_DEBUG", "True") != "True" else ".env.dev")
+load_dotenv(dotenv_path=env_path)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
-
-env_path = os.path.join(BASE_DIR, ".env.prod" if not DEBUG else ".env.dev")
-load_dotenv(dotenv_path=env_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key')
@@ -33,6 +33,7 @@ if not DEBUG:
 # Application definition
 
 INSTALLED_APPS = [
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -152,6 +153,17 @@ DATABASES = {
 
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
+# Хранилище для медиафайлов
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# MEDIA_URL = '/static/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles/media/')
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'cityvoice-media'
+AWS_S3_REGION_NAME = 'eu-north-1'  
+AWS_S3_ADDRESSING_STYLE = 'virtual'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+# делает файлы публичными
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False  # убирает подписи из URL-ов
