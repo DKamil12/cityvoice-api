@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from django.conf import settings
 from django.conf.urls.static import static
+from .settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,4 +16,6 @@ urlpatterns = [
     path('api/v1/charts/', include('charts.urls')),
     path('api/v1/statistics/survey/', include('surveys.urls')),
     path('api/v1/rewards/', include('rewards.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+# if not DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
