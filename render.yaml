@@ -4,7 +4,9 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    buildCommand: ""
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
     startCommand: ""
     envVars:
       - key: DEBUG
