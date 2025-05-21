@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
+    unit = models.CharField(max_length=50, blank=True)  # Баллы, жалобы, дБА и т.д.
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
