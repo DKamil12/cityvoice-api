@@ -168,7 +168,7 @@ AWS_S3_ADDRESSING_STYLE = 'virtual'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # делает файлы публичными
-AWS_DEFAULT_ACL = 'public-read'
+AWS_DEFAULT_ACL = None
 AWS_QUERYSTRING_AUTH = False  # убирает подписи из URL-ов
 
 
