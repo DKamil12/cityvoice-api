@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from reports.models import Report, District
 from django.utils.dateparse import parse_date
+from rest_framework import status
 
 from reports.models import Category
 from surveys.models import SurveyResponse
@@ -120,6 +121,37 @@ class CitywideCategoryCorrelationView(APIView):
             # Кол-во жалоб в этой категории
             complaint_count = Report.objects.filter(
                 category=cat
+            ).count()
+
+            result.append({
+                "category_id": cat.id,
+                "category_name": cat.name,
+                "average_rating": round(avg_rating or 0, 2),
+                "complaint_count": complaint_count,
+            })
+
+        return Response(result)
+
+
+class DistrictCategoryCorrelationView(APIView):
+    def get(self, request, district_id):
+        try:
+            district = District.objects.get(pk=district_id)
+        except District.DoesNotExist:
+            return Response({"detail": "District not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        categories = Category.objects.all()
+
+        result = []
+        for cat in categories:
+            avg_rating = SurveyResponse.objects.filter(
+                question__category=cat,
+                district=district
+            ).aggregate(avg=Avg("rating"))["avg"]
+
+            complaint_count = Report.objects.filter(
+                category=cat,
+                district=district
             ).count()
 
             result.append({
