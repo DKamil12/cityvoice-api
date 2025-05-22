@@ -1,9 +1,12 @@
 from django.shortcuts import render
-from django.db.models import Count
+from django.db.models import Count, Avg
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from reports.models import Report, District
 from django.utils.dateparse import parse_date
+
+from reports.models import Category
+from surveys.models import SurveyResponse
 
 # Create your views here.
 class ReportsByCategoryView(APIView):
@@ -101,3 +104,29 @@ class DistrictCategoryStatsView(APIView):
             "total": total,
             "categories": categories
         })
+
+class CitywideCategoryCorrelationView(APIView):
+    def get(self, request):
+        # Получаем все категории
+        categories = Category.objects.all()
+
+        result = []
+        for cat in categories:
+            # Средняя оценка по вопросам этой категории
+            avg_rating = SurveyResponse.objects.filter(
+                question__category=cat
+            ).aggregate(avg=Avg("rating"))["avg"]
+
+            # Кол-во жалоб в этой категории
+            complaint_count = Report.objects.filter(
+                category=cat
+            ).count()
+
+            result.append({
+                "category_id": cat.id,
+                "category_name": cat.name,
+                "average_rating": round(avg_rating or 0, 2),
+                "complaint_count": complaint_count,
+            })
+
+        return Response(result)
