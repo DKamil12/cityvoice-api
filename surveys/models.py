@@ -1,11 +1,13 @@
 from django.db import models
 from reports.models import District
 from django.contrib.auth.models import User
+from reports.models import Category
 
 
 class SurveyQuestion(models.Model):
     text = models.TextField()
     is_active = models.BooleanField(default=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
 class SurveyResponse(models.Model):

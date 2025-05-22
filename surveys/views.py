@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import viewsets
 from django.db.models import Avg
 from .models import SurveyQuestion, SurveyResponse
 from .serializers import SurveyQuestionSerializer, SurveyResponseSerializer
@@ -8,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import ValidationError
 
 class SurveyQuestionListView(generics.ListAPIView):
-    queryset = SurveyQuestion.objects.filter(is_active=True)
+    queryset = SurveyQuestion.objects.all()
     serializer_class = SurveyQuestionSerializer
 
 class SurveyResponseCreateView(APIView):

@@ -1,0 +1,114 @@
+[
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько удобно вам добираться до нужных мест с помощью общественного или личного транспорта?",
+      "is_active": true,
+      "category": 1
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько качественными вы считаете дороги и тротуары в вашем районе?",
+      "is_active": true,
+      "category": 2
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько комфортным и надёжным вы считаете общественный транспорт в вашем районе?",
+      "is_active": true,
+      "category": 3
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько свободным является дорожное движение в вашем районе?",
+      "is_active": true,
+      "category": 4
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько достаточно в вашем районе зелёных зон: парков, деревьев, скверов?",
+      "is_active": true,
+      "category": 5
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько комфортный уровень шума в вашем районе?",
+      "is_active": true,
+      "category": 6
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько чистым вы считаете воздух в вашем районе?",
+      "is_active": true,
+      "category": 7
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько чистыми вы считаете улицы и дворы вашего района?",
+      "is_active": true,
+      "category": 8
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько хорошо освещаются улицы и дворы в вашем районе в тёмное время суток?",
+      "is_active": true,
+      "category": 9
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько безопасно вы себя чувствуете в вашем районе в разное время суток?",
+      "is_active": true,
+      "category": 10
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько удобно передвигаться по району людям с ограниченными возможностями (пандусы, тактильные дорожки и т.д.)?",
+      "is_active": true,
+      "category": 11
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько развита инфраструктура для отдыха и спорта (парки, площадки, стадионы) в вашем районе?",
+      "is_active": true,
+      "category": 12
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько хорошее состояние фасадов, подъездов и лифтов в вашем доме?",
+      "is_active": true,
+      "category": 13
+    }
+  },
+  {
+    "model": "surveys.surveyquestion",
+    "fields": {
+      "text": "Насколько качественно работают коммунальные службы (вода, отопление, вывоз мусора и др.) в вашем доме?",
+      "is_active": true,
+      "category": 14
+    }
+  }
+]
