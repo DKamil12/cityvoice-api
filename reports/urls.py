@@ -10,5 +10,5 @@ router.register('districts', DistrictViewSet)
 
 urlpatterns = [
     path('reports/', include(router.urls)),
-    path('/reports/my-reports/', MyReportsView.as_view()),
+    path('reports/my-reports/', MyReportsView.as_view()),
 ]
