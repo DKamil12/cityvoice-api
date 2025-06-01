@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, ReportViewSet, CommentViewSet, DistrictViewSet
+from .views import CategoryViewSet, ReportViewSet, CommentViewSet, DistrictViewSet, MyReportsView
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
@@ -9,5 +9,6 @@ router.register(r'comments', CommentViewSet)
 router.register('districts', DistrictViewSet)
 
 urlpatterns = [
-    path('reports/', include(router.urls))
+    path('reports/', include(router.urls)),
+    path('my-reports/', MyReportsView.as_view()),
 ]

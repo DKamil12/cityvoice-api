@@ -9,8 +9,7 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env_path = os.path.join(BASE_DIR, ".env.prod" if os.getenv("DJANGO_DEBUG", "True") != "True" else ".env.dev")
-load_dotenv(dotenv_path=env_path)
+load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env.dev"))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG", "True") == "True"
@@ -153,12 +152,10 @@ if not DEBUG:
             "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
         },
         "staticfiles": {
-            # "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
             "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -169,7 +166,7 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # делает файлы публичными
 AWS_DEFAULT_ACL = None
-AWS_QUERYSTRING_AUTH = False  # убирает подписи из URL-ов
+AWS_QUERYSTRING_AUTH = False 
 
 
 LOGGING = {

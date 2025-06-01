@@ -1,0 +1,211 @@
+	Singapore	6.45	
+
+Switzerland	6.36	87
+
+Netherlands	6.18	87
+
+Hong Kong	6.06	
+
+Portugal	6.05	106
+
+Japan	6.02	81
+
+France	5.96	105
+
+Oman	5.96	102
+
+United Arab Emirates	5.92	80
+
+Austria	5.89	96
+
+United States	5.87	107
+
+South Korea	5.73	93
+
+Spain	5.63	103
+
+Qatar	5.6	82
+
+Sweden	5.57	94
+
+Denmark	5.55	78
+
+Croatia	5.49	98
+
+Taiwan	5.48	91
+
+Germany	5.46	97
+
+Malaysia	5.45	92
+
+Luxembourg	5.34	
+
+Finland	5.26	83
+
+Chile	5.22	92
+
+Cyprus	5.22	76
+
+Canada	5.21	106
+
+United Kingdom	5.17	87
+
+Bahrain	5.14	
+
+Namibia	5.09	99
+
+Israel	4.99	84
+
+Saudi Arabia	4.97	106
+
+Ecuador	4.95	60
+
+Turkey	4.93	93
+
+Brunei	4.93	88
+
+Azerbaijan	4.78	80
+
+Australia	4.77	96
+
+Greece	4.73	93
+
+Rwanda	4.7	47
+
+Lithuania	4.7	89
+
+New Zealand	4.68	83
+
+Estonia	4.68	81
+
+Slovenia	4.66	90
+
+China	4.58	90
+
+Norway	4.55	73
+
+Tajikistan	4.53	52
+
+Egypt	4.52	83
+
+Seychelles	4.51	
+
+Mexico	4.5	90
+
+Morocco	4.48	95
+
+Ireland	4.48	88
+
+Mauritius	4.47	
+
+India	4.44	58
+
+Italy	4.39	95
+
+Belgium	4.39	92
+
+Dominican Republic	4.39	74
+
+Thailand	4.36	77
+
+Panama	4.35	72
+
+Eswatini	4.3	69
+
+South Africa	4.27	100
+
+Albania	4.26	65
+
+Nicaragua	4.23	46
+
+Kenya	4.22	57
+
+Kuwait	4.15	85
+
+Poland	4.14	92
+
+Iceland	4.14	77
+
+Honduras	4.06	56
+
+El Salvador	4	56
+
+Slovakia	3.96	
+
+Czech Republic	3.95	98
+
+Pakistan	3.94	86
+
+Jordan	3.94	77
+
+Iran	3.91	94
+
+Jamaica	3.9	61
+
+Trinidad and Tobago	3.9	51
+
+Indonesia	3.89	55
+
+Hungary	3.89	96
+
+Gambia	3.84	53
+
+Cape Verde	3.83	
+
+Montenegro	3.81	59
+
+Sri Lanka	3.8	50
+
+Georgia	3.79	64
+
+Tunisia	3.77	78
+
+Senegal	3.75	71
+
+Tanzania	3.74	57
+
+Botswana	3.64	91
+
+Armenia	3.62	57
+
+Algeria	3.57	88
+
+Sierra Leone	3.57	64
+
+Philippines	3.53	52
+
+Uganda	3.53	64
+
+Bulgaria	3.52	88
+
+Ghana	3.48	56
+
+Latvia	3.45	77
+
+Argentina	3.43	91
+
+Mali	3.43	72
+
+Serbia	3.43	94
+
+Zambia	3.38	73
+
+Bolivia	3.35	50
+
+North Macedonia	3.35	74
+
+Cambodia	3.33	55
+
+Uruguay	3.33	82
+
+Ivory Coast	3.31	78
+
+Ethiopia	3.27	61
+
+Colombia	3.27	57
+
+Russia	3.26	76
+
+Malta	3.24	
+
+Kazakhstan

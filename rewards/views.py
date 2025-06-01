@@ -46,13 +46,13 @@ class ShopViewSet(viewsets.ViewSet):
     def purchase(self, request):
         product_id = request.data.get('product_id')
         try:
-            product = Product.objects.get(pk=product_id)
+            product = Product.objects.get(pk=product_id)  # проверка наличия товара
         except Product.DoesNotExist:
             return Response({'error': 'Product not found'}, status=404)
 
         total = request.user.rewards.aggregate(total=Sum('amount'))['total'] or 0
         spent = request.user.purchases.aggregate(spent=Sum('product__price'))['spent'] or 0
-        balance = total - spent
+        balance = total - spent  # получение текущего баланса пользователя
 
         if balance < product.price:
             return Response({'error': 'Недостаточно монет'}, status=status.HTTP_400_BAD_REQUEST)

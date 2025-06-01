@@ -9,46 +9,6 @@ from rest_framework import status
 from reports.models import Category
 from surveys.models import SurveyResponse
 
-# Create your views here.
-class ReportsByCategoryView(APIView):
-    def get(self, request, format=None):
-        start_date = request.GET.get('start_date')
-        end_date = request.GET.get('end_date')
-
-        reports = Report.objects.all()
-
-        if start_date:
-            reports = reports.filter(created_at__gte=parse_date(start_date))
-        if end_date:
-            reports = reports.filter(created_at__lte=parse_date(end_date))
-
-        data = (
-            reports.values('category__name').annotate(total=Count('id')).order_by('-total')
-        )
-
-        return Response(data)
-    
-
-class ReportsByDistrictView(APIView):
-    def get(self, request, format=None):
-        start_date = request.GET.get('start_date')
-        end_date   = request.GET.get('end_date')
-
-        qs = Report.objects.all()
-        if start_date:
-            qs = qs.filter(created_at__gte=parse_date(start_date))
-        if end_date:
-            qs = qs.filter(created_at__lte=parse_date(end_date))
-
-        data = (
-            qs
-            .values('district__name')
-            .annotate(total=Count('id'))
-            .order_by('-total')
-        )
-        # результат: [{"district__name": "Медеуский", "total": 29}, ...]
-        return Response(data)
-    
 
 class DistrictCategoryStatsView(APIView):
     """
@@ -105,6 +65,7 @@ class DistrictCategoryStatsView(APIView):
             "total": total,
             "categories": categories
         })
+
 
 class CitywideCategoryCorrelationView(APIView):
     def get(self, request):

@@ -43,38 +43,3 @@ class SurveyAvailabilityAPIView(APIView):
         user_answers = SurveyResponse.objects.filter(user=request.user).values('question_id').distinct().count()
         available = user_answers < total_questions
         return Response({"available": available})
-
-
-class SurveyStatisticsView(APIView):
-    def get(self, request):
-        district_id = request.GET.get('district')
-        responses = SurveyResponse.objects.all()
-        if district_id:
-            responses = responses.filter(district_id=district_id)
-
-        stats = responses.values('question__text').annotate(
-            average_rating=Avg('rating')
-        ).order_by('question__text')
-
-        return Response(stats)
-
-
-class CitywideSurveyStatsView(APIView):
-    # permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        # Группируем по вопросам и считаем среднюю оценку
-        data = (
-            SurveyResponse.objects
-            .values('question__text')
-            .annotate(average=Avg('rating'))
-            .order_by('question__text')
-        )
-
-        return Response([
-            {
-                'question': item['question__text'],
-                'average': round(item['average'], 1) if item['average'] is not None else 0
-            }
-            for item in data
-        ])

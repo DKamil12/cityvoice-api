@@ -2,7 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.utils.dateparse import parse_date
 
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 
 from django.contrib.gis.geos import Point
@@ -29,6 +29,23 @@ class CategoryViewSet(viewsets.ModelViewSet):
     """
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
+
+class MyReportsView(generics.ListAPIView):
+    """
+    Представление для просмотра жалоб пользователя. 
+
+    HTTP действия: GET
+    """
+    serializer_class = ReportOnReadSerializer
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
+    filterset_fields = ['category', 'status']
+    ordering_fields = ['created_at']
+
+    def get_queryset(self):
+        user = self.request.user
+        return Report.objects.filter(user=user)
 
 
 class ReportViewSet(viewsets.ModelViewSet):
